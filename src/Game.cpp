@@ -211,6 +211,8 @@ SDL_Texture* Game::GetTexture(const std::string& fileName) {
 		SDL_Surface* surf = IMG_Load(fileName.c_str());
 		if (!surf) {
 			SDL_Log("Failed to load texture: %s", fileName.c_str());
+			// ロード失敗でゲームを終了する
+			mIsRunning = false;
 			return nullptr;
 		}
 		// テクスチャを生成
@@ -218,6 +220,8 @@ SDL_Texture* Game::GetTexture(const std::string& fileName) {
 		SDL_FreeSurface(surf); // バッファのメモリを解放
 		if (!tex) {
 			SDL_Log("Failed to convert surface to texture for %s", fileName.c_str());
+			// ロード失敗でゲームを終了する
+			mIsRunning = false;
 			return nullptr;
 		}
 		// 連想配列にテクスチャを追加

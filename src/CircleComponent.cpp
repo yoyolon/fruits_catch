@@ -13,14 +13,13 @@ const Vec2& CircleComponent::Get_Center() const {
 	return mOwner->Get_Position() + mOffset;
 }
 
-// “ñ‚Â‚Ì‰~‚ÌŒğ·”»’è
+// “ñ‚Â‚Ì‰~‚ÌŒğ·”»’è(—¼•Ó‚ğ“ñæ‚·‚é‚±‚Æ‚Å‚‘¬‰»)
 bool Intersect(const CircleComponent& a, const CircleComponent& b) {
 	// ‹——£‚Ì“ñæ‚ğŒvZ
 	float distance = (a.Get_Center() - b.Get_Center()).Length2();
-
 	// ‹…‚Ì”¼Œa‚Ì˜a‚Ì“ñæ‚ğŒvZ
-	float radii = a.Get_Radius() + b.Get_Radius();
-	radii *= radii;
+	float radius = a.Get_Radius() + b.Get_Radius();
+	radius *= radius;
 
-	return distance <= radii;
+	return distance <= radius;
 }

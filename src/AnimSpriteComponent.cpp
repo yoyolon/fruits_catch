@@ -94,13 +94,13 @@ void AnimSpriteComponent::Draw(SDL_Renderer* renderer) {
 			nullptr,
 			SDL_FLIP_NONE);
 
-		// Œð·”»’è‰~‚Ì•`‰æ(ƒeƒXƒg)
-		float x = mOwner->Get_Position().x;
-		float y = mOwner->Get_Position().y - 10.0f;
-		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-		DrawCircle(renderer, 8, Vec2(x, y), false);
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		DrawCircle(renderer, 2, Vec2(x, y));
+		//// DEGUG: Œð·”»’è‰~‚Ì•`‰æ
+		//float x = mOwner->Get_Position().x;
+		//float y = mOwner->Get_Position().y - 10.0f;
+		//SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+		//DrawCircle(renderer, 8, Vec2(x, y), false);
+		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		//DrawCircle(renderer, 2, Vec2(x, y));
 	}
 }
 
