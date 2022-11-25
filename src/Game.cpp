@@ -64,6 +64,7 @@ void Game::Shutdown() {
 // ゲームループの実行
 void Game::RunLoop() {
 	while (mIsRunning) {
+		if (mPlayer->Get_Time() < 0) mIsRunning = false; // 時間切れ
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
