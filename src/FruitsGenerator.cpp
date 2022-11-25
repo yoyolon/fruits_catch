@@ -4,7 +4,7 @@
 
 // コンストラクタ
 FruitsGenerator::FruitsGenerator(Game* game)
-	: Actor(game), mTimer(0.0f), mDownTime(0.25f)
+	: Actor(game), mTimer(0.0f), mDownTime(0.2f)
 {}
 
 
