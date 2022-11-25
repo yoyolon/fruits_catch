@@ -13,7 +13,10 @@ Game::Game()
 	: mWindow(nullptr), 
 	  mRenderer(nullptr),
 	  mIsRunning(true),
-	  mUpdatingActors(false)
+	  mUpdatingActors(false),
+	  mGenerator(nullptr),
+	  mPlayer(nullptr),
+	  mTicksCount(0)
 {}
 
 // ƒQ[ƒ€‚Ì‰Šú‰»
