@@ -39,12 +39,14 @@ void SpriteComponent::Draw(SDL_Renderer* renderer) {
 			SDL_FLIP_NONE);
 
 		// DEBUG: Œð·”»’è‰~‚Ì•`‰æ
-		//float x = mOwner->Get_Position().x;
-		//float y = mOwner->Get_Position().y;
-		//SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-		//DrawCircle(renderer, 8, Vec2(x, y), false);
-		//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-		//DrawCircle(renderer, 2, Vec2(x, y));
+		if (IS_DEBUG_MODE) {
+			float x = mOwner->Get_Position().x;
+			float y = mOwner->Get_Position().y;
+			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+			DrawCircle(renderer, 8, Vec2(x, y), false);
+			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			DrawCircle(renderer, 2, Vec2(x, y));
+		}
 	}
 }
 

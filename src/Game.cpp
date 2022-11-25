@@ -35,7 +35,7 @@ bool Game::Initialize() {
 		return false;
 	}
 	// ウィンドウ初期化
-	mWindow = SDL_CreateWindow("Chapter2", 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
+	mWindow = SDL_CreateWindow("Fruits Catch", 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 	if (!mWindow) {
 		SDL_Log("Failed to create window: %s", SDL_GetError());
 		return false;

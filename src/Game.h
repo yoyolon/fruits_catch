@@ -6,8 +6,9 @@
 #include <SDL.h>
 
 
-constexpr int WINDOW_WIDTH  = 640;
-constexpr int WINDOW_HEIGHT = 480;
+constexpr int WINDOW_WIDTH  = 640;   // 画面幅
+constexpr int WINDOW_HEIGHT = 480;   // 画面高さ
+constexpr bool IS_DEBUG_MODE = false; // デバッグモード設定
 
 // *** ゲーム進行 ***
 class Game {
