@@ -27,7 +27,14 @@ int main(int argc, char** argv) {
 	if (success) {
 		game.RunLoop();
 	}
-	std::cout << "Your Score is " << game.Get_Score() << '\n';
+	// ƒQ[ƒ€I—¹Žž
+	if (game.Get_IsGameComplete()) {
+		std::cout << "Congratulations! you have completed this game." << '\n';
+	}
+	else {
+		std::cout << "You were failed to complete this game." << '\n';
+	}
+	std::cout << "Your Score: " << game.Get_Score() << '\n';
 	game.Shutdown();
 	return 0;
 }

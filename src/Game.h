@@ -22,6 +22,7 @@ public:
 	void RemoveActor(class Actor* actor);
 	// プレイヤー関連
 	int Get_Score() const;
+	bool Get_IsGameComplete() const { return mIsGameComplete; };
 	// フルーツ関連
 	void AddFruits(class Fruits* frutis);
 	void RemoveFruits(class Fruits* frutis);
@@ -54,6 +55,7 @@ private:
 	Uint32 mTicksCount;
 	bool mIsRunning;
 	bool mUpdatingActors; // アクターを更新するか
+	bool mIsGameComplete; // ゲームクリアフラグ
 	class Player* mPlayer; // プレイヤー
 	class FruitsGenerator* mGenerator; // フルーツ生成
 	std::vector<class Fruits*> mFruits; // フルーツ

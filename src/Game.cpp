@@ -8,11 +8,13 @@
 #include "FruitsGenerator.h"
 #include "Player.h"
 #include "SpriteComponent.h"
+#include "Random.h"
 
 Game::Game() 
 	: mWindow(nullptr), 
 	  mRenderer(nullptr),
 	  mIsRunning(true),
+	  mIsGameComplete(false),
 	  mUpdatingActors(false),
 	  mGenerator(nullptr),
 	  mPlayer(nullptr),
@@ -44,7 +46,8 @@ bool Game::Initialize() {
 		SDL_Log("Failed to create renderer: %s", SDL_GetError());
 		return false;
 	}
-
+	// 乱数の初期化
+	Random::Init();
 	LoadData();
 	mTicksCount = SDL_GetTicks();
 	return true;
@@ -64,7 +67,14 @@ void Game::Shutdown() {
 // ゲームループの実行
 void Game::RunLoop() {
 	while (mIsRunning) {
-		if (mPlayer->Get_Time() < 0) mIsRunning = false; // 時間切れ
+		if (mPlayer->Get_Score() >= 1000) {
+			// 1000点以上でゲームクリア
+			mIsGameComplete = true;
+		}
+		if (mPlayer->Get_Time() < 0) {
+			// 時間切れ
+			mIsRunning = false;
+		}
 		ProcessInput();
 		UpdateGame();
 		GenerateOutput();
@@ -284,4 +294,8 @@ void Game::RemoveSprite(SpriteComponent* sprite) {
 
 
 // 得点の取得
-int Game::Get_Score() const { return mPlayer->Get_Score(); }
+int Game::Get_Score() const { 
+	return mPlayer->Get_Score(); 
+}
+
+
