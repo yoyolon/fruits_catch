@@ -1,0 +1,21 @@
+#include "FruitsGenerator.h"
+#include "Fruits.h"
+#include "Random.h"
+
+// コンストラクタ
+FruitsGenerator::FruitsGenerator(Game* game)
+	: Actor(game), mTimer(0.0f), mDownTime(0.75f)
+{}
+
+// 更新
+void FruitsGenerator::UpdateActor(float deltaTime) {
+	mTimer += deltaTime;
+	// 一定時間経過でフルーツを生成
+	if (mTimer >= mDownTime) {
+		// ランダム性を持たせる
+		if (mTimer - mDownTime >= Random::GenFloatRange(0.0f, 2.0f)) {
+			new Fruits(this->Get_Game());
+			mTimer = 0.0f;
+		}
+	}
+}
