@@ -19,6 +19,6 @@ public:
 
 private:
 	class CircleComponent* mCircle; // 衝突判定コンポーネント
-	int mPoint; // 得点
-	FruitsType mType; // オブジェクトの種類
+	int mPoint; // フルーツの得点
+	FruitsType mType;
 };
