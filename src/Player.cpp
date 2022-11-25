@@ -50,18 +50,10 @@ void Player::UpdateActor(float deltaTime) {
 			// スコアと残り時間の追加
 			Fruits::FruitsType type = fruit->Get_Type();
 			if (type == Fruits::FruitsType::Fruits) mScore += fruit->Get_Point();
-			else if (type == Fruits::FruitsType::Fruits) mTimer -= fruit->Get_Point();
+			else if (type == Fruits::FruitsType::Watch) mTimer += fruit->Get_Point();
 			// フルーツの除去
 			fruit->Set_State(State::Dead);
 			break;
 		}
 	}
-}
-
-// アクター固有の入力処理(あとで削除)
-void Player::ActorInput(const uint8_t* keyState) {
-	// レザーを発射 	
-	//if (keyState[SDL_SCANCODE_SPACE] && mLaserCooldown <= 0.0f) { 		
-	//	mLaserCooldown = 0.5f; 	
-	//}
 }
