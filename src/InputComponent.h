@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MoveComponent.h"
 #include <cstdint>
+#include "MoveComponent.h"
 
 // キーボード入力処理用コンポーネント
 

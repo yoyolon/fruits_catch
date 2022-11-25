@@ -2,9 +2,10 @@
 
 #include "Actor.h"
 
+// *** フルーツオブジェクト ***
 class Fruits : public Actor {
 public:
-	enum Type { Efruits, Ewatch };
+	enum class FruitsType { Fruits, Watch };
 
 	Fruits(class Game* game);
 	~Fruits();
@@ -12,10 +13,10 @@ public:
 	// ゲッタ
 	class CircleComponent* Get_Circle() const { return mCircle; }
 	int Get_Point() const { return mPoint; }
-	Type Get_Type() const { return mType; }
+	FruitsType Get_Type() const { return mType; }
 
 private:
 	class CircleComponent* mCircle;
 	int mPoint; // 得点
-	Type mType;
+	FruitsType mType;
 };

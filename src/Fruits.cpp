@@ -1,15 +1,15 @@
 #include "Fruits.h"
-#include "SpriteComponent.h"
-#include "MoveComponent.h"
-#include "Game.h"
-#include "Random.h"
 #include "CircleComponent.h"
+#include "Game.h"
+#include "MoveComponent.h"
+#include "Random.h"
+#include "SpriteComponent.h"
 
 Fruits::Fruits(Game* game)
-	: Actor(game), mCircle(nullptr), mType(Efruits), mPoint(0)
+	: Actor(game), mCircle(nullptr), mType(Fruits::FruitsType::Fruits), mPoint(0)
 {
 	// ランダムな位置・向きで初期化
-	Vec2 randomPos = Random::GenVector(Vec2::Zero, Vec2(WINDOWWIDTH, 0.0f));
+	Vec2 randomPos = Random::GenVector(Vec2::Zero, Vec2(WINDOW_WIDTH, 0.0f));
 	Set_Position(randomPos);
 	Set_Rotation(-0.5 * Math::Pi);
 
@@ -47,7 +47,7 @@ Fruits::Fruits(Game* game)
 	// タイマー: 5%
 	else {
 		spriteComp->Set_Texture(game->GetTexture("assets/watch.png"));
-		mType = Ewatch;
+		mType = Fruits::FruitsType::Watch;
 		mPoint = 5;
 		moveComp->Set_ForwardSpeed(100.0f);
 	}

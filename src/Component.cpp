@@ -1,6 +1,6 @@
 #include "Component.h"
-#include "Actor.h"
 #include <SDL.h>
+#include "Actor.h"
 
 // コンストラクタ
 Component::Component(Actor* owner, int updateOrder)

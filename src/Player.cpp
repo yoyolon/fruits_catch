@@ -1,10 +1,10 @@
 #include "Player.h"
-#include "Game.h"
-#include "Fruits.h"
-#include "AnimSpriteComponent.h"
-#include "InputComponent.h"
-#include "CircleComponent.h"
 #include <algorithm>
+#include "AnimSpriteComponent.h"
+#include "CircleComponent.h"
+#include "Fruits.h"
+#include "Game.h"
+#include "InputComponent.h"
 
 // コンストラクタ
 Player::Player(Game* game)
@@ -41,16 +41,16 @@ void Player::UpdateActor(float deltaTime) {
 	mTimer -= deltaTime;
 	// 位置の更新
 	Vec2 pos = Get_Position();
-	pos.x = std::clamp(pos.x, 0.0f, float(WINDOWWIDTH));
+	pos.x = std::clamp(pos.x, 0.0f, float(WINDOW_WIDTH));
 	Set_Position(pos);
 
 	// フルーツと交差判定
 	for (auto fruit : Get_Game()->Get_Fruits()) {
 		if (Intersect(*mCircle, *(fruit->Get_Circle()))) {
 			// スコアと残り時間の追加
-			Fruits::Type type = fruit->Get_Type();
-			if (type == Fruits::Efruits) mScore += fruit->Get_Point();
-			else if (type == Fruits::Efruits) mTimer -= fruit->Get_Point();
+			Fruits::FruitsType type = fruit->Get_Type();
+			if (type == Fruits::FruitsType::Fruits) mScore += fruit->Get_Point();
+			else if (type == Fruits::FruitsType::Fruits) mTimer -= fruit->Get_Point();
 			// フルーツの除去
 			fruit->Set_State(EDead);
 			break;

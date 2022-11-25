@@ -21,8 +21,8 @@ void MoveComponent::Update(float deltaTIme) {
 		pos += mOwner->Get_Forward() * mForwardSpeed * deltaTIme;
 
 		// TEST: ”ÍˆÍŠOˆ—
-		pos.x = std::clamp(pos.x, 0.0f, float(WINDOWWIDTH));
-		pos.y = std::clamp(pos.y, 0.0f, float(WINDOWHEIGHT));
+		pos.x = std::clamp(pos.x, 0.0f, float(WINDOW_WIDTH));
+		pos.y = std::clamp(pos.y, 0.0f, float(WINDOW_HEIGHT));
 		mOwner->Set_Position(pos);
 	}
 }

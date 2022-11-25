@@ -2,7 +2,7 @@
 
 #include "Actor.h"
 
-// フルーツオブジェクトを生成
+// *** フルーツオブジェクトのジェネレータ ***
 class FruitsGenerator : public Actor {
 public:
 	FruitsGenerator(Game* game);

@@ -1,12 +1,13 @@
 #pragma once
 
-#include <SDL.h>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 #include <vector>
+#include <SDL.h>
 
-constexpr int WINDOWWIDTH  = 640;
-constexpr int WINDOWHEIGHT = 480;
+
+constexpr int WINDOW_WIDTH  = 640;
+constexpr int WINDOW_HEIGHT = 480;
 
 // ゲームの進行を行う
 class Game {

@@ -1,12 +1,12 @@
-#include <algorithm>
-#include <sstream>
-#include <iomanip>
-#include <SDL2/SDL_image.h>
 #include "Game.h"
+#include <algorithm>
+#include <iomanip>
+#include <sstream>
+#include <SDL2/SDL_image.h>
 #include "Actor.h"
 #include "Fruits.h"
-#include "Player.h"
 #include "FruitsGenerator.h"
+#include "Player.h"
 #include "SpriteComponent.h"
 
 Game::Game() 
@@ -32,7 +32,7 @@ bool Game::Initialize() {
 		return false;
 	}
 	// ウィンドウ初期化
-	mWindow = SDL_CreateWindow("Chapter2", 100, 100, WINDOWWIDTH, WINDOWHEIGHT, 0);
+	mWindow = SDL_CreateWindow("Chapter2", 100, 100, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 	if (!mWindow) {
 		SDL_Log("Failed to create window: %s", SDL_GetError());
 		return false;
@@ -43,10 +43,8 @@ bool Game::Initialize() {
 		SDL_Log("Failed to create renderer: %s", SDL_GetError());
 		return false;
 	}
-
 	// アセットの読み込み
 	LoadData();
-
 	// ライブラリ初期化からの時間を取得
 	mTicksCount = SDL_GetTicks();
 	return true;
@@ -84,7 +82,7 @@ void Game::ProcessInput() {
 
 	// キーボード入力を取得して処理
 	const uint8_t* keyState = SDL_GetKeyboardState(NULL); // キーボード全体の状態
-	// Escキーが押されている場合
+	// Escキーが押されている場合ゲームを終了
 	if (keyState[SDL_SCANCODE_ESCAPE]) {
 		mIsRunning = false;
 	}
@@ -146,30 +144,30 @@ void Game::GenerateOutput() {
 	SDL_RenderPresent(mRenderer);
 }
 
-// データの作成・読み込み
+// データのメモリ確保
 void Game::LoadData() {
 	// プレイヤーの作成
 	mPlayer = new Player(this);
-	mPlayer->Set_Position(Vec2(WINDOWWIDTH/2, WINDOWHEIGHT - 64));
+	mPlayer->Set_Position(Vec2(WINDOW_WIDTH/2, WINDOW_HEIGHT - 64));
 	mPlayer->Set_Scale(2.0f);
 
 	// フルーツジェネレータの生成
 	mGenerator = new FruitsGenerator(this);
 
 	// フルーツの作成
-	constexpr int numFruitss = 1;
+	constexpr int numFruitss = 2;
 	for (int i = 0; i < numFruitss; i++) {
 		new Fruits(this);
 	}
 
 	// 背景の作成
 	Actor* actbg = new Actor(this);
-	actbg->Set_Position(Vec2(WINDOWWIDTH / 2, WINDOWHEIGHT / 2));
-	SpriteComponent* bg = new SpriteComponent(actbg, 10);
+	actbg->Set_Position(Vec2(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2));
+	SpriteComponent* bg = new SpriteComponent(actbg, 10); // 背景画像
 	bg->Set_Texture(GetTexture("Assets/bg.png"));
 }
 
-// データの解放
+// データのメモリ解放
 void Game::UnloadData() {
 	// アクターの削除
 	// ~Actor(デストラクタ)がRemoveActorを呼び出すので別のループを使用

@@ -18,8 +18,8 @@
 // licensed under(https://github.com/gameprogcpp/code/blob/master/LICENSE).
 //--------------------------------------------------------------------------------------------------------------------
 
-#include "Game.h"
 #include <iostream>
+#include "Game.h"
 
 int main(int argc, char** argv) {
 	Game game;
@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 	if (success) {
 		game.RunLoop();
 	}
-	std::cout << game.Get_Score();
+	std::cout << "Your Score is " << game.Get_Score() << '\n';
 	game.Shutdown();
 	return 0;
 }

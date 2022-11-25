@@ -1,10 +1,10 @@
 #pragma once
 
-#include <vector>
-#include <cstdint>
 #include <algorithm>
-#include "Math.h"
+#include <cstdint>
+#include <vector>
 #include "Game.h"
+#include "Math.h"
 #include "Utility.h"
 
 // アクタークラス

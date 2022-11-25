@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cmath>
-#include <memory>
 #include <limits>
 
 // 算術ライブラリ
@@ -35,7 +34,7 @@ namespace Math {
 	}
 }
 
-// 2Dベクトル
+// *** 2Dベクトル ***
 class Vec2 {
 public:
 	float x, y;
@@ -107,14 +106,14 @@ public:
 	static Vec2 Reflect(const Vec2& v, const Vec2& n) {
 		return v - 2.0f * Vec2::Dot(v, n) * n;
 	}
-	// 行列変換
+	// 行列変換 TODO: 実装
 	static Vec2 Transform(const Vec2& v, const class Mat3& m, float w=1.0);
 
 	// 定数
 	static const Vec2 Zero;
 };
 
-// 3Dベクトル
+// *** 3Dベクトル ***
 class Vec3 {
 public:
 	float x, y, z;
@@ -197,13 +196,9 @@ public:
 	static Vec3 Reflect(const Vec3& v, const Vec3& n) {
 		return v - 2.0f * Vec3::Dot(v, n) * n;
 	}
-	// 行列変換
+	// 行列変換 TODO: 実装
 	static Vec3 Transform(const Vec3& v, const class Mat3& m, float w=1.0);
-	// クォータニオン
-	static Vec3 Transform(const Vec3& v, const class Quat& q);
 
 	// 定数
 	static const Vec3 Zero;
 };
-
-// TODO: 行列とクォータニオンの実装

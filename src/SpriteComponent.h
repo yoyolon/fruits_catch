@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Component.h"
 #include <SDL.h>
+#include "Component.h"
 #include "Math.h"
 
 // スプライトクラス(画像を扱う)
