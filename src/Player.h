@@ -8,7 +8,6 @@ public:
 	Player(class Game* game);
 
 	void UpdateActor(float DeltaTime) override;
-	void ActorInput(const uint8_t* keyState) override;
 
 	// ƒQƒbƒ^
 	int Get_Score() const { return mScore; }

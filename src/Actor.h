@@ -15,17 +15,11 @@ public:
 	Actor(class Game* game);
 	virtual ~Actor(); // デストラクタ
 
-	// アクターの更新(Gameから呼び出す)
 	void Update(float deltaTime);
-	// アクターが持つコンポーネントを更新
 	void UpdateComponents(float deltaTime);
-	// アクターのみの更新(オーバーライドして使う)
-	virtual void UpdateActor(float deltaTime) = 0;
-
-	// ゲームからの入力を処理
 	void ProcessInput(const uint8_t* keyState);
-	// アクター固有の入力処理(オーバーライドして使う)
-	virtual void ActorInput(const uint8_t* keyState) = 0;
+	virtual void UpdateActor(float deltaTime);
+	virtual void ActorInput(const uint8_t* keyState);
 
 	// アクセッサ
 	const Vec2& Get_Position() const { return mPosition; }

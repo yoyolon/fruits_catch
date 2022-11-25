@@ -30,6 +30,10 @@ void Actor::Update(float deltaTime) {
 	}
 }
 
+// アクター固有の更新処理
+void Actor::UpdateActor(float deltaTime) {
+
+}
 
 // 全コンポーネントの更新
 void Actor::UpdateComponents(float deltaTime) {
@@ -37,7 +41,6 @@ void Actor::UpdateComponents(float deltaTime) {
 		comp->Update(deltaTime);
 	}
 }
-
 
 // キー入力の処理
 void Actor::ProcessInput(const uint8_t* keyState) {
@@ -51,6 +54,11 @@ void Actor::ProcessInput(const uint8_t* keyState) {
 			ActorInput(keyState);
 		}
 	}
+}
+
+// アクター固有の入力処理
+void Actor::ActorInput(const uint8_t* keyState) {
+
 }
 
 

@@ -73,3 +73,5 @@ void Fruits::UpdateActor(float deltaTime) {
 		Set_State(State::Dead);
 	}
 }
+
+// キーボード処理
