@@ -9,7 +9,7 @@
 constexpr int WINDOW_WIDTH  = 640;
 constexpr int WINDOW_HEIGHT = 480;
 
-// ゲームの進行を行う
+// *** ゲーム進行 ***
 class Game {
 public:
 	Game();
@@ -23,8 +23,8 @@ public:
 	// プレイヤー関連
 	int Get_Score() const;
 	// フルーツ関連
-	void AddFruits(class Fruits* ast);
-	void RemoveFruits(class Fruits* ast);
+	void AddFruits(class Fruits* frutis);
+	void RemoveFruits(class Fruits* frutis);
 	std::vector<class Fruits*>& Get_Fruits() { return mFruits; }
 	// スプライト(画像)関連
 	void AddSprite(class SpriteComponent* sprite);

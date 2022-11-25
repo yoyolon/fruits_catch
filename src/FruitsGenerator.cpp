@@ -7,10 +7,11 @@ FruitsGenerator::FruitsGenerator(Game* game)
 	: Actor(game), mTimer(0.0f), mDownTime(0.75f)
 {}
 
+
 // 更新
 void FruitsGenerator::UpdateActor(float deltaTime) {
-	mTimer += deltaTime;
 	// 一定時間経過でフルーツを生成
+	mTimer += deltaTime;
 	if (mTimer >= mDownTime) {
 		// ランダム性を持たせる
 		if (mTimer - mDownTime >= Random::GenFloatRange(0.0f, 2.0f)) {

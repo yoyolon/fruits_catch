@@ -8,7 +8,7 @@
 Fruits::Fruits(Game* game)
 	: Actor(game), mCircle(nullptr), mType(Fruits::FruitsType::Fruits), mPoint(0)
 {
-	// ランダムな位置・向きで初期化
+	// 位置の初期化
 	Vec2 randomPos = Random::GenVector(Vec2::Zero, Vec2(WINDOW_WIDTH, 0.0f));
 	Set_Position(randomPos);
 	Set_Rotation(-0.5 * Math::Pi);
@@ -24,7 +24,7 @@ Fruits::Fruits(Game* game)
 	if (rand <= 5) {
 		spriteComp->Set_Texture(game->GetTexture("assets/peach.png"));
 		mPoint = 200;
-		moveComp->Set_ForwardSpeed(50.0f);
+		moveComp->Set_ForwardSpeed(75.0f);
 	}
 	// 苺: 25%
 	else if (rand <= 30) {
@@ -52,7 +52,7 @@ Fruits::Fruits(Game* game)
 		moveComp->Set_ForwardSpeed(100.0f);
 	}
 
-	// 円コンポーネントの生成(衝突判定用)
+	// 衝突判定用コンポーネントの生成
 	mCircle = new CircleComponent(this);
 	mCircle->Set_Radius(8.0f); // TODO: マジックナンバーの除去
 
@@ -60,6 +60,16 @@ Fruits::Fruits(Game* game)
 	game->AddFruits(this);
 }
 
+// デストラクタ
 Fruits::~Fruits() {
 	Get_Game()->RemoveFruits(this);
+}
+
+// アクターの更新
+void Fruits::UpdateActor(float deltaTime) {
+	// 画面外に出たら削除
+	Vec2 pos = Get_Position();
+	if (pos.y >= float(WINDOW_HEIGHT)) {
+		Set_State(State::Dead);
+	}
 }

@@ -44,7 +44,7 @@ void Player::UpdateActor(float deltaTime) {
 	pos.x = std::clamp(pos.x, 0.0f, float(WINDOW_WIDTH));
 	Set_Position(pos);
 
-	// フルーツと交差判定
+	// プレイヤーとフルーツの交差判定
 	for (auto fruit : Get_Game()->Get_Fruits()) {
 		if (Intersect(*mCircle, *(fruit->Get_Circle()))) {
 			// スコアと残り時間の追加
@@ -52,7 +52,7 @@ void Player::UpdateActor(float deltaTime) {
 			if (type == Fruits::FruitsType::Fruits) mScore += fruit->Get_Point();
 			else if (type == Fruits::FruitsType::Fruits) mTimer -= fruit->Get_Point();
 			// フルーツの除去
-			fruit->Set_State(EDead);
+			fruit->Set_State(State::Dead);
 			break;
 		}
 	}

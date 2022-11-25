@@ -7,10 +7,10 @@
 #include "Math.h"
 #include "Utility.h"
 
-// アクタークラス
+// *** アクタークラス ***
 class Actor {
 public:
-	enum State { EActive, Epause, EDead };
+	enum class State { Active, Pause, Dead };
 
 	Actor(class Game* game);
 	virtual ~Actor(); // デストラクタ
@@ -20,14 +20,14 @@ public:
 	// アクターが持つコンポーネントを更新
 	void UpdateComponents(float deltaTime);
 	// アクターのみの更新(オーバーライドして使う)
-	virtual void UpdateActor(float deltaTime);
+	virtual void UpdateActor(float deltaTime) = 0;
 
 	// ゲームからの入力を処理
 	void ProcessInput(const uint8_t* keyState);
 	// アクター固有の入力処理(オーバーライドして使う)
-	virtual void ActorInput(const uint8_t* keyState);
+	virtual void ActorInput(const uint8_t* keyState) = 0;
 
-	// ゲッタ/セッタ
+	// アクセッサ
 	const Vec2& Get_Position() const { return mPosition; }
 	void Set_Position(const Vec2& position) { mPosition = position; }
 	float Get_Scale() const { return mScale; }
@@ -39,19 +39,17 @@ public:
 	void Set_State(State state) { mState = state; }
 	class Game* Get_Game() { return mGame; }
 
-	// アクターの追加/削除
+	// コンポーネントの追加/削除
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
 
 private:
 	// アクターの状態
 	State mState;
-
 	// トランスフォーム
 	Vec2 mPosition;
 	float mScale;
 	float mRotation;
-
 	// アクターのコンポーネント
 	std::vector<class Component*> mComponents;
 	// ゲーム

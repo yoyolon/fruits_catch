@@ -19,6 +19,7 @@ Game::Game()
 	  mTicksCount(0)
 {}
 
+
 // ゲームの初期化
 bool Game::Initialize() {
 	// SDLライブラリの初期化
@@ -43,21 +44,22 @@ bool Game::Initialize() {
 		SDL_Log("Failed to create renderer: %s", SDL_GetError());
 		return false;
 	}
-	// アセットの読み込み
+
 	LoadData();
-	// ライブラリ初期化からの時間を取得
 	mTicksCount = SDL_GetTicks();
 	return true;
 }
 
+
 // ゲームの終了
 void Game::Shutdown() {
-	UnloadData();
+	UnloadData(); // メモリの解放
 	IMG_Quit();
 	SDL_DestroyRenderer(mRenderer);
 	SDL_DestroyWindow(mWindow);
 	SDL_Quit();
 }
+
 
 // ゲームループの実行
 void Game::RunLoop() {
@@ -68,6 +70,7 @@ void Game::RunLoop() {
 	}
 }
 
+
 // 入力データの処理
 void Game::ProcessInput() {
 	SDL_Event event;
@@ -77,16 +80,15 @@ void Game::ProcessInput() {
 		case SDL_QUIT:
 			mIsRunning = false;
 			break;
+		default:
+			break;
 		}
 	}
-
 	// キーボード入力を取得して処理
 	const uint8_t* keyState = SDL_GetKeyboardState(NULL); // キーボード全体の状態
-	// Escキーが押されている場合ゲームを終了
 	if (keyState[SDL_SCANCODE_ESCAPE]) {
 		mIsRunning = false;
 	}
-
 	// 全アクターの入力処理
 	mUpdatingActors = true;
 	for (auto actor : mActors) {
@@ -95,13 +97,14 @@ void Game::ProcessInput() {
 	mUpdatingActors = false;
 }
 
+
 // ゲームの更新
 void Game::UpdateGame() {
-	// 16msまで待機
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16));
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16)); // フレーム時間調整
+
 	// デルタタイムの計算(単位: 秒)
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
-	deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime;
+	deltaTime = (deltaTime > 0.05f) ? 0.05f : deltaTime; // 最大値を制限
 	mTicksCount = SDL_GetTicks(); 
 
 	// 全アクターの更新
@@ -110,17 +113,15 @@ void Game::UpdateGame() {
 		actor->Update(deltaTime);
 	}
 	mUpdatingActors = false;
-
 	// 保留アクターをアクターに移動
 	for (auto pending : mPendingActors) {
 		mActors.emplace_back(pending);
 	}
 	mPendingActors.clear();
-
-	// EDead状態のアクターを削除
+	// State::Dead状態のアクターを削除
 	std::vector<Actor*> deadActors;
 	for (auto actor : mActors) {
-		if (actor->Get_State() == Actor::EDead) {
+		if (actor->Get_State() == Actor::State::Dead) {
 			deadActors.emplace_back(actor);
 		}
 	}
@@ -129,7 +130,8 @@ void Game::UpdateGame() {
 	}
 }
 
-// 出力データの生成(ディスプレイへの描画)
+
+// ディスプレイへの出力
 void Game::GenerateOutput() {
 	// バックバッファを単色でクリア
 	SDL_SetRenderDrawColor(mRenderer, 220, 220, 220, 255);
@@ -140,9 +142,10 @@ void Game::GenerateOutput() {
 		sprite->Draw(mRenderer);
 	}
 
-	// フロントバッファとバックバッファを交換
+	// バックバッファをディスプレイに表示
 	SDL_RenderPresent(mRenderer);
 }
+
 
 // データのメモリ確保
 void Game::LoadData() {
@@ -167,6 +170,7 @@ void Game::LoadData() {
 	bg->Set_Texture(GetTexture("Assets/bg.png"));
 }
 
+
 // データのメモリ解放
 void Game::UnloadData() {
 	// アクターの削除
@@ -181,6 +185,7 @@ void Game::UnloadData() {
 	}
 	mTextures.clear();
 }
+
 
 // テクスチャの取得
 SDL_Texture* Game::GetTexture(const std::string& fileName) {
@@ -197,8 +202,7 @@ SDL_Texture* Game::GetTexture(const std::string& fileName) {
 			SDL_Log("Failed to load texture: %s", fileName.c_str());
 			return nullptr;
 		}
-
-		// テクスチャをバッファから生成
+		// テクスチャを生成
 		tex = SDL_CreateTextureFromSurface(mRenderer, surf);
 		SDL_FreeSurface(surf); // バッファのメモリを解放
 		if (!tex) {
@@ -211,19 +215,22 @@ SDL_Texture* Game::GetTexture(const std::string& fileName) {
 	return tex;
 }
 
-// フルーツ(敵)の追加
-void Game::AddFruits(Fruits* ast) {
-	mFruits.emplace_back(ast);
+
+// フルーツの追加
+void Game::AddFruits(Fruits* frutis) {
+	mFruits.emplace_back(frutis);
 }
 
-// フルーツ(敵)の削除
-void Game::RemoveFruits(Fruits* ast) {
+
+// フルーツの削除
+void Game::RemoveFruits(Fruits* frutis) {
 	// 削除対象をフルーツ配列から除外
-	auto itr = std::find(mFruits.begin(), mFruits.end(), ast);
+	auto itr = std::find(mFruits.begin(), mFruits.end(), frutis);
 	if (itr != mFruits.end()) {
 		mFruits.erase(itr);
 	}
 }
+
 
 // アクターの追加
 void Game::AddActor(Actor* actor) {
@@ -236,6 +243,7 @@ void Game::AddActor(Actor* actor) {
 	}
 	
 }
+
 
 // アクターの削除
 void Game::RemoveActor(Actor* actor) {
@@ -251,19 +259,19 @@ void Game::RemoveActor(Actor* actor) {
 	}
 }
 
+
 // スプライトの追加
 void Game::AddSprite(SpriteComponent* sprite) {
-	// 追加するスプライトの描画順
+	// 描画順に基づき配列に挿入
 	int myDrawOrder = sprite->Get_DrawOrder();
-	// 描画順に基づき配列に格納
 	auto itr = mSprites.begin();
 	while (itr != mSprites.end()) {
 		if (myDrawOrder < (*itr)->Get_DrawOrder()) break;
 		itr++;
 	}
-	// スプライトの挿入
 	mSprites.insert(itr, sprite);
 }
+
 
 // スプライトの削除
 void Game::RemoveSprite(SpriteComponent* sprite) {
@@ -272,6 +280,7 @@ void Game::RemoveSprite(SpriteComponent* sprite) {
 		mSprites.erase(itr);
 	}
 }
+
 
 // 得点の取得
 int Game::Get_Score() const { return mPlayer->Get_Score(); }

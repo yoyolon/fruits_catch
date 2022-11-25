@@ -9,6 +9,8 @@ public:
 
 	Fruits(class Game* game);
 	~Fruits();
+	
+	void UpdateActor(float DeltaTime) override;
 
 	// ゲッタ
 	class CircleComponent* Get_Circle() const { return mCircle; }
@@ -16,7 +18,7 @@ public:
 	FruitsType Get_Type() const { return mType; }
 
 private:
-	class CircleComponent* mCircle;
+	class CircleComponent* mCircle; // 衝突判定コンポーネント
 	int mPoint; // 得点
-	FruitsType mType;
+	FruitsType mType; // オブジェクトの種類
 };

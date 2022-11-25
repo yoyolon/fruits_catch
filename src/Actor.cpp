@@ -3,32 +3,33 @@
 
 // コンストラクタ
 Actor::Actor(Game* game)
-	: mState(EActive),
+	: mState(State::Active),
 	  mPosition(Vec2::Zero),
 	  mScale(1.0f),
 	  mRotation(0.0f),
 	  mGame(game)
-{
-	mGame->AddActor(this);
-}
+{ mGame->AddActor(this); }
+
 
 // デストラクタ
 Actor::~Actor() {
 	mGame->RemoveActor(this);
 	// 各コンポーネントを削除
-	// MEMO: ~ComponentがActorのメソッドを呼び出すので使えない
+	// NOTE: ~ComponentがActorのメソッドを呼び出すので使えない
 	while (!mComponents.empty()) {
 		delete mComponents.back();
 	}
 }
 
+
 // アクターの更新
 void Actor::Update(float deltaTime) {
-	if (mState == EActive) {
+	if (mState == State::Active) {
 		UpdateComponents(deltaTime);
 		UpdateActor(deltaTime);
 	}
 }
+
 
 // 全コンポーネントの更新
 void Actor::UpdateComponents(float deltaTime) {
@@ -37,15 +38,11 @@ void Actor::UpdateComponents(float deltaTime) {
 	}
 }
 
-// アクター固有の更新
-void Actor::UpdateActor(float deltaTime) {
-	// オーバーライド
-}
 
 // キー入力の処理
 void Actor::ProcessInput(const uint8_t* keyState) {
-	if (mState == EActive) {
-		if (mState == EActive) {
+	if (mState == State::Active) {
+		if (mState == State::Active) {
 			// 全コンポーネントの処理
 			for (auto comp : mComponents) {
 				comp->ProcessInput(keyState);
@@ -56,10 +53,6 @@ void Actor::ProcessInput(const uint8_t* keyState) {
 	}
 }
 
-// アクター固有の入力処理
-void Actor::ActorInput(const uint8_t* keyState) {
-	// オーバーライド
-}
 
 // コンポーネントの追加
 void Actor::AddComponent(Component* component) {
@@ -73,6 +66,7 @@ void Actor::AddComponent(Component* component) {
 	// 挿入
 	mComponents.insert(itr, component);
 }
+
 
 // コンポーネントの削除
 void Actor::RemoveComponent(Component* component) {

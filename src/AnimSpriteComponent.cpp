@@ -33,7 +33,6 @@ void AnimSpriteComponent::Update(float deltaTime) {
 // TODO: マジックナンバーの除去(汎用的な実装にする)
 void AnimSpriteComponent::ProcessInput(const uint8_t* keyState) {
 	SpriteComponent::ProcessInput(keyState);
-	// TODO: キー入力処理
 	// 同時押しは停止
 	if (keyState[SDL_SCANCODE_LEFT] && keyState[SDL_SCANCODE_RIGHT]) {
 		Set_AnimStart(6);

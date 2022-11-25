@@ -6,7 +6,6 @@
 class FruitsGenerator : public Actor {
 public:
 	FruitsGenerator(Game* game);
-	// ŠÔ‚ÌXV
 	void UpdateActor(float deltaTime) override;
 
 private:
