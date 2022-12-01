@@ -5,10 +5,10 @@
 
 // Zpƒ‰ƒCƒuƒ‰ƒŠ
 namespace Math {
-	const float Pi = 3.1415926535f;
-	const float InvPi = 1 / Pi;
-	const float Infty = std::numeric_limits<float>::infinity();
-	const float NegInfty = -Infty;
+	constexpr float Pi = 3.1415926535f;
+	constexpr float InvPi = 1 / Pi;
+	constexpr float Infty = std::numeric_limits<float>::infinity();
+	constexpr float NegInfty = -Infty;
 
 	inline float Deg2Rad(float degree) {
 		return degree * Pi / 180.0f;
