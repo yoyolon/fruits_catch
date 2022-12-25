@@ -2,7 +2,7 @@
 
 ## 概要
 
-[Game Programming in C++](https://github.com/gameprogcpp/code)のプログラムをベースに作成したゲームです．空から落下してくるフルーツをプレイヤーを移動させてキャッチします．ゲームエンジンやライブラリを使用しておらず，ゲームプログラミングの基礎を理解する目的で作成しました．
+[Game Programming in C++](https://github.com/gameprogcpp/code)のプログラムをベースに作成したゲームです．空から落下してくるフルーツをプレイヤーを移動させてキャッチします．ゲームエンジンやゲームライブラリを使用しておらず，ゲームプログラミングの基礎を理解する目的で作成しました．
 
 <div align="center">
     <img src="assets/title.png">
