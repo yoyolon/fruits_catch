@@ -16,6 +16,7 @@
 // 
 // This software is based on "Game Programming in C++ Code"
 // licensed under(https://github.com/gameprogcpp/code/blob/master/LICENSE).
+// More information on these licenses can be found in NOTICE.txt
 //--------------------------------------------------------------------------------------------------------------------
 
 #include <iostream>
